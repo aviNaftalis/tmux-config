@@ -1,0 +1,87 @@
+╭──────────────────────────────────────────────────────────────────────────╮
+│  TMUX CHEATSHEET                       prefix = Ctrl+Space  (or Ctrl+b)  │
+│  Press  q  to close · arrows / PgUp / PgDn to scroll                     │
+╰──────────────────────────────────────────────────────────────────────────╯
+
+── PANES ──────────────────────────────────────────────────────────────────
+  Alt + h/j/k/l         move between panes (no prefix needed)
+  prefix h/j/k/l        same, with prefix
+  prefix ←/↓/↑/→        same, default tmux arrows
+  prefix o              cycle to next pane
+  prefix ;              jump to last-active pane (toggle)
+  prefix q              show pane numbers — then press # to jump
+  prefix H/J/K/L        resize pane (repeatable)
+  prefix |  \  %        split vertical   (keeps current dir)
+  prefix -  _  "        split horizontal (keeps current dir)
+  prefix z              toggle zoom (fullscreen this pane)
+  prefix x              kill current pane (no confirm)
+  prefix !              break pane into its own window
+  prefix {  /  }        swap pane left / right
+  prefix Space          (in pane mode) cycle pane layouts
+  prefix y              toggle sync-panes (broadcast typing)
+
+── WINDOWS / TABS ─────────────────────────────────────────────────────────
+  Alt + 1..9            jump to window 1..9
+  Alt + ←  /  →         previous / next window
+  Ctrl+Shift + ← / →    move current window left / right
+  prefix c              new window (keeps current dir)
+  prefix Tab            toggle to last window
+  prefix Space          (top-level) last window
+  prefix ,              rename current window
+  prefix X              kill current window
+  prefix w              choose window/session from tree (default)
+  prefix '              choose session from list
+  prefix &              kill window (with confirm — default)
+  prefix f              find window by name
+
+── COPY / PASTE ───────────────────────────────────────────────────────────
+  Mouse drag            select → auto-copies to system clipboard
+  Double-click          select word + copy
+  Triple-click          select line + copy
+  Right-click           context menu: Paste / Copy Mode / Split / Kill
+                        (in copy-mode, right-click copies the selection)
+  Ctrl+V                paste from system clipboard (no prefix)
+  Shift+Insert          paste from system clipboard (no prefix)
+  prefix Escape  / [    enter copy-mode
+  prefix p              paste tmux buffer
+  prefix =              choose from buffer history
+
+  In copy-mode (vim keys):
+    h j k l             move           v   start selection
+    w b e               word motions   V   line selection
+    0 $ ^               line motions   C-v rectangle toggle
+    g  /  G             top / bottom   y / Enter / C-c  copy
+    Ctrl+u / Ctrl+d     half page      H / L   start / end of line
+    Ctrl+b / Ctrl+f     full page      / ?     search fwd / back
+    Esc / q             cancel         n / N   next / prev match
+    {count}{motion}     vim counts work — e.g.  4k  12j  3w  10G
+
+  Gotcha — V (line select) includes the trailing newline, so pasting at a
+  shell prompt will EXECUTE the line. To copy a line WITHOUT the newline:
+    0 v $ y             start · select · end · yank   (paste stays editable)
+
+── SESSIONS ───────────────────────────────────────────────────────────────
+  prefix d              detach
+  prefix s              choose session (tree view)
+  prefix $              rename session
+  prefix (  /  )        previous / next session
+  CLI:  tmux ls               list sessions
+        tmux a [-t name]      attach
+        tmux new -s name      new named session
+        tmux kill-session -t name
+
+── MISC ───────────────────────────────────────────────────────────────────
+  prefix r              reload ~/.tmux.conf
+  prefix ?              this cheatsheet
+  prefix /              raw list-keys (every binding tmux knows)
+  prefix :              command prompt
+  prefix t              big clock
+  prefix R              refresh client (redraw)
+  prefix Ctrl+l         clear screen + scrollback
+
+── TIPS ───────────────────────────────────────────────────────────────────
+  • Splits and new windows inherit the current directory.
+  • Hold Shift while selecting with the mouse to bypass tmux mouse mode
+    and use your terminal's native selection (useful for OSC 52 copy).
+  • `prefix :` then type any tmux command (tab-completes).
+  • Status bar shows: [session] | windows | SYNC? · time · hostname.
