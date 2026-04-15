@@ -13,6 +13,12 @@ Set Padding      20
 Set TypingSpeed  50ms
 Set PlaybackSpeed 1.0
 
+# Landscape image framing the terminal (matches the Windows Terminal background).
+# Swap MarginFill to any local JPG/PNG to restyle.
+Set MarginFill   "/mnt/c/Windows/Web/Wallpaper/ThemeC/img30.jpg"
+Set Margin       60
+Set BorderRadius 12
+
 # === Setup (hidden) ==========================================================
 # Write a fake-prompt rcfile + a tiny tmux overlay that sources the real
 # config and overrides PS1/hostname so the GIF doesn't leak machine info.
@@ -107,27 +113,70 @@ Type "'"
 Enter
 Sleep 800ms
 
-# === New window + switch (prefix c, then Alt+1/2) ===========================
+# === Open multiple windows + jump between them ==============================
+# Open three new tabs (prefix c) with distinct names
 Ctrl+Space
 Type "c"
+Sleep 400ms
+Type "echo 'tab 2 — editor'" Enter
 Sleep 500ms
-Type "echo 'window 2 — switch with Alt+1/2'" Enter
-Sleep 700ms
-Escape
-Type "1"
-Sleep 600ms
-Escape
-Type "2"
-Sleep 700ms
-
-# === Rename window (prefix , — prefilled, clear with Ctrl+u) ================
 Ctrl+Space
 Type ","
-Sleep 400ms
+Sleep 300ms
 Ctrl+u
-Type "scratch"
+Type "editor"
 Enter
-Sleep 800ms
+Sleep 400ms
+
+Ctrl+Space
+Type "c"
+Sleep 400ms
+Type "echo 'tab 3 — logs'" Enter
+Sleep 500ms
+Ctrl+Space
+Type ","
+Sleep 300ms
+Ctrl+u
+Type "logs"
+Enter
+Sleep 400ms
+
+Ctrl+Space
+Type "c"
+Sleep 400ms
+Type "echo 'tab 4 — notes'" Enter
+Sleep 500ms
+Ctrl+Space
+Type ","
+Sleep 300ms
+Ctrl+u
+Type "notes"
+Enter
+Sleep 600ms
+
+# Jump between tabs with prefix 1..4 (tmux default select-window -t N)
+Ctrl+Space
+Type "1"
+Sleep 600ms
+Ctrl+Space
+Type "3"
+Sleep 600ms
+Ctrl+Space
+Type "2"
+Sleep 600ms
+Ctrl+Space
+Type "4"
+Sleep 600ms
+# Cycle with prefix n / prefix Space (last-window)
+Ctrl+Space
+Type "n"
+Sleep 500ms
+Ctrl+Space
+Space
+Sleep 500ms
+Ctrl+Space
+Type "n"
+Sleep 700ms
 
 # === Show cheatsheet (prefix ?) =============================================
 Ctrl+Space
